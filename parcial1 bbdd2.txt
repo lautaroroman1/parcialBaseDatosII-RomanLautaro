@@ -1,0 +1,85 @@
+use("cafeteria");
+db.cafesespeciales.drop()
+db.cafesespeciales.insertOne({
+    tipo: "espresso",
+    ingredientes: ["vainilla", "chocolate", "caramelo"],
+    peso: 200,
+    intensidad: "baja",
+    precio: ["efectivo", 500],
+    leche: true,
+    tostador: {
+        localidad: "san justo",
+        nombre: "tostadora san justo",
+        cuit: 202346822,
+    }
+})
+db.cafesespeciales.insertOne({
+    tipo: "filtrado",
+    ingredientes: ["chocolate", "canela"],
+    peso: 100,
+    intensidad: "media",
+    precio: ["efectivo", 500],
+    leche: false,
+    tostador: {
+        localidad: "santos",
+        nombre: "tostadora santos",
+        cuit: 345623535
+    }
+})
+db.cafesespeciales.insertOne({
+    tipo: "cold brew",
+    ingredientes: ["vainilla", "caramelo"],
+    peso: 500,
+    intensidad: "baja",
+    precio: ["tarjeta", 520],
+    leche: true,
+    tostador: {
+        localidad: "lanus",
+        nombre: "tostadora lanus",
+        cuit: 342637461
+    }
+})
+db.cafesespeciales.insertOne({
+    tipo: "descafeinado",
+    ingredientes: ["azucar"],
+    peso: 300,
+    intensidad: "alta",
+    precio: ["tarjeta", 100],
+    leche: false,
+    tostador: {
+        localidad: "banfield",
+        nombre: "tostadora banfield",
+        cuit: 347564851
+    }
+})
+db.cafesespeciales.insertOne({
+    tipo: "americano",
+    ingredientes: ["vainilla"],
+    peso: 350,
+    intensidad: "media",
+    precio: ["tarjeta", 520],
+    leche: false,
+    tostador: {
+        localidad: "avellaneda",
+        nombre: "tostadora avellaneda",
+        cuit: 235352712
+    }
+})
+
+1) db.cafesespeciales.find({ingredientes: "chocolate"})
+2) db.cafesespeciales.find({ingredientes: "chocolate"}).count()
+3) db.cafesespeciales.find({tipo: "cold brew", ingredientes: "vainilla"})
+4) db.cafesespeciales.find({intensidad: "media"}, {_id:0, tipo:1, peso:1})
+5) db.cafesespeciales.find({peso : {$gte : 200, $lte: 260}}, {_id:0, tipo:1, peso:1, intensidad:1})
+6) db.cafesespeciales.find({'tostador.localidad': {$regex : "^san"}})
+7) db.cafesespeciales.aggregate([{$group: {_id: "$tipo", total:{$sum : "$peso"}}}]);
+8) db.cafesespeciales.updateMany({intensidad: "alta"}, {$push : {ingredientes : "whisky"}})
+9) db.cafesespeciales.updateMany({peso: {$gte: 200, $lte: 260}}, {$inc: {peso: 10}})
+10) db.cafesespeciales.deleteMany({peso: {$lte: 210}})
+
+
+
+
+
+
+
