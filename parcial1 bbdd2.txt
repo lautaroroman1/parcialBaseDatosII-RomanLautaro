@@ -71,7 +71,7 @@ db.cafesespeciales.insertOne({
 3) db.cafesespeciales.find({tipo: "cold brew", ingredientes: "vainilla"})
 4) db.cafesespeciales.find({intensidad: "media"}, {_id:0, tipo:1, peso:1})
 5) db.cafesespeciales.find({peso : {$gte : 200, $lte: 260}}, {_id:0, tipo:1, peso:1, intensidad:1})
-6) db.cafesespeciales.find({'tostador.localidad': "^san"}})
+6) db.cafesespeciales.find({'tostador.localidad': {$regex: "^san"}})
 7) db.cafesespeciales.aggregate([{$group: {_id: "$tipo", total:{$sum : "$peso"}}}]);
 8) db.cafesespeciales.updateMany({intensidad: "alta"}, {$push : {ingredientes : "whisky"}})
 9) db.cafesespeciales.updateMany({peso: {$gte: 200, $lte: 260}}, {$inc: {peso: 10}})
